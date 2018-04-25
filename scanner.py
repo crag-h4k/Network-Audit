@@ -1,7 +1,6 @@
 #!/usr/bin/python
 from nmap import PortScanner
 from os import system
-#Note:  The CSRL Networks range from 192.168.192.0/24 through 192.168.255.0/24
 #run as sudo
 
 #start = input('Define x of 192.168.x.0/24 for first subnet:\t')
