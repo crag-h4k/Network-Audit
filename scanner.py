@@ -1,26 +1,31 @@
 #!/usr/bin/python
+#execute as root
+from time import time
 from nmap import PortScanner
-#run as root
+from datetime import datetime
 
-subnet = 192
+start = 192
+end = 255
 
-while subnet <= 255:
-	
+while start <= end:
+	raw_timestamp = time()
+	timestamp = datetime.fromtimestamp(raw_timestamp).strftime('%Y-%m-%d %H:%M:%S')
+
 	nm = PortScanner()
-	ip_range = '192.168.' + str(subnet) + '.0/24'
-	print('!!! Starting on:',ip_range,'!!!')
+	subnet = '192.168.' + str(start) + '.0/24'
+	print('!!! Starting on:',ip_range,'!!!',timestamp)
 	
 	try:
 		#nmap -A -Pn 192.168.192.0/24
-		nm.scan(hosts=ip_range, arguments='-A')
+		nm.scan(hosts=subnet, arguments='-A')
 		to_csv = nm.csv()
 
-		print('Successfully scanned',ip_range)
+		print('Successfully scanned',subnet,timestamp)
 		print(to_csv)
 		with open('net_scan.csv', 'a+') as f:
-			f.write(to_csv)
+			f.write(timestamp,'\n',to_csv)
 			f.close()
 	except:
-		print('SOME PROBLEM WITH SCAN OF',ip_range)
+		print('SOME PROBLEM WITH SCAN OF', subnet, timestamp)
 
-	subnet += 1
+	start += 1
