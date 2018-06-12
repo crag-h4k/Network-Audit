@@ -8,8 +8,8 @@ from time import sleep
 
 def auto_scan_host():
 	interval = 300
-	filename = '202_44.csv'
-	addr= '192.168.202.44'
+	filename = ''
+	addr= ''
 	
 	while True:
 		raw_timestamp = time()
