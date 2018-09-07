@@ -13,26 +13,16 @@ def scan(subnet,filename):
     success_msg = 'Successfully scanned '+ subnet + ' ' + timestamp + '\n'
     error_msg = 'Some problem scanning ' + subnet + ' ' + timestamp + '\n'
 
-    try:
-            #nmap -A -Pn 192.168.192.0/24
-            print(init_msg)
-            nm.scan(hosts=subnet, arguments='-A -Sv -Pn')
-            to_csv = nm.csv()
+        #nmap -A -Pn 192.168.192.0/24
+    print(init_msg)
+    nm.scan(hosts=subnet, arguments='-A -sV')
+    to_csv = nm.csv()
 
-            with open(filename, 'a+') as f:
-                    f.write(to_csv)
-                    f.close()
-            print(success_msg,to_csv)
-            #clean(filename)		
-    except KeyboardInterrupt:
-            #clean(filename)		
-            exit()   
-    except:
-            with open(filename, 'a+') as f:
-                    f.write(error_msg)
-                    f.close()
-            print(error_msg)	
-            #clean(filename)		
+    with open(filename, 'a+') as f:
+        f.write(to_csv)
+        f.close()
+        print(success_msg,to_csv)
+        #clean(filename)		
 
 subnet = '192.168.185.101-120' 
 filename = 'scan.csv'
